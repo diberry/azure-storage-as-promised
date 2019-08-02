@@ -6,7 +6,6 @@
   "license": "Apache-2.0",
   "main": "build/index.js",
   "types": "build/**/*.d.ts",
-  "files": ["build/**/*"],
   "keywords":["azure","storage","azure storage", "file"],
   "repository": {
     "type": "git",
