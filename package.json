@@ -1,39 +1,49 @@
 {
   "name": "azure-storage-as-promised",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Wrapper on top of azure-storage with promises.",
   "author": "diberry",
   "license": "Apache-2.0",
   "main": "build/index.js",
   "types": "build/**/*.d.ts",
-  "keywords":["azure","storage","azure storage", "file"],
+  "keywords": [
+    "azure",
+    "storage",
+    "azure storage",
+    "file"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/diberry/azure-storeage-as-promised.git"
-  },  
+  },
   "scripts": {
     "test": "jest",
     "clean": "rimraf build/*",
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm test && npm run lint",
-    "preversion" : "npm run lint",
-    "postversion" : "git push && git push --tags",
-    "version" : "npm run format && git add -A src",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "postversion": "git push && git push --tags",
+    "version": "npm run format && git add -A src",
     "prebuild": "npm run clean",
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\" ",
     "lint": "tslint -p tsconfig.base.json -c tslint.json --exclude \"node_modules/**\" \"**/*.ts\" "
   },
   "dependencies": {
-    "azure-storage": "^2.10.3"
+    "azure-storage": "^2.10.3",
+    "bluebird": "^3.5.5"
   },
   "devDependencies": {
+    "@types/bluebird": "^3.5.27",
+    "@types/into-stream": "^3.1.1",
     "@types/jest": "^24.0.16",
     "@types/node": "^12.6.9",
     "dotenv": "^8.0.0",
+    "into-stream": "^5.1.0",
     "jest": "^24.8.0",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
+    "stream-length": "^1.0.2",
     "ts-jest": "^24.0.2",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
