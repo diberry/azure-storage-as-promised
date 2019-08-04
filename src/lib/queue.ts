@@ -1,83 +1,87 @@
 import azure = require('azure-storage');
 
 export class Queue {
+  private queueService: any;
 
-    private queueService: any;
+  /**
+   *
+   * @param connectionString - Azure Storage connection string
+   */
+  constructor(connectionString) {
+    this.queueService = new azure.QueueService(connectionString);
+  }
+  /**
+   *
+   * @param queue
+   * @param messageText
+   * @param options
+   */
+  public async addMessage(queue, messageText, options) {
+    const self = this;
 
-    /**
-     * 
-     * @param connectionString - Azure Storage connection string
-     */
-    constructor(connectionString) {
-        this.queueService = new azure.QueueService(connectionString);
+    if (!queue || !messageText) {
+      throw Error('Queue - params missing');
     }
-    public async addMessage(queue, messageText, options) {
 
-        const self = this;
-
-        if (!queue || !messageText) {
-            throw ("Queue - params missing");
+    return new Promise((resolve, reject) => {
+      self.queueService.createQueueIfNotExists(queue, options, error => {
+        if (error) {
+          throw error;
         }
 
-        return new Promise((resolve, reject) => {
-
-            self.queueService.createQueueIfNotExists(queue, options, (error) => {
-
-                if (error) {
-                    throw error;
-                }
-
-                self.queueService.createMessage(queue, messageText, (error2, result) => {
-                    if (error2) {
-                        reject(error2);
-                    }
-                    resolve(result);
-
-                });
-            });
+        self.queueService.createMessage(queue, messageText, (error2, result) => {
+          if (error2) {
+            reject(error2);
+          }
+          resolve(result);
         });
-    }
-   public async getMessage(queue, options){
+      });
+    });
+  }
+  /**
+   *
+   * @param queue
+   * @param options
+   */
+  public async getMessage(queue, options) {
+    const self = this;
 
-        const self = this;
-
-        if (!queue ){
-            throw ("Queue - params missing");
-        } 
-
-        return new Promise(function(resolve, reject) {
-
-            self. queueService.getMessage(queue, options, (error, result) =>{
-
-                if (error) {
-                    return reject(error);
-                }
-                
-                return resolve(result);
-
-            });
-        });
+    if (!queue) {
+      throw Error('Queue - params missing');
     }
 
-    public async deleteMessage(queue, messageId, popReceipt, options){
-
-        const self = this;
-
-        if (!queue || !messageId || !popReceipt ){
-            throw ("Queue - params missing");
+    return new Promise((resolve, reject) => {
+      self.queueService.getMessage(queue, options, (error, result) => {
+        if (error) {
+          return reject(error);
         }
 
-        return new Promise(function(resolve, reject) {
+        return resolve(result);
+      });
+    });
+  }
+  /**
+   *
+   * @param queue
+   * @param messageId
+   * @param popReceipt
+   * @param options
+   */
+  public async deleteMessage(queue, messageId, popReceipt, options) {
+    const self = this;
 
-            self.queueService.deleteMessage(queue, messageId, popReceipt, options, (error, result) =>{
-
-                if (error) {
-                    return reject(error);
-                }
-                
-                return resolve(result);
-
-            });
-        });
+    if (!queue || !messageId || !popReceipt) {
+      throw Error('Queue - params missing');
     }
+
+    return new Promise((resolve, reject) => {
+      self.queueService.deleteMessage(queue, messageId, popReceipt, options, (error, result) => {
+        if (error) {
+          return reject(error);
+        }
+
+        return resolve(result);
+      });
+    });
+  }
 }

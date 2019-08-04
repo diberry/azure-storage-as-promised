@@ -5,7 +5,7 @@ import { File } from "../src/index";
 
 describe('File', () => {
 
-    it('should manage file', async (done) => {
+    it('should manage file in subdir', async (done) => {
 
         try {
             jest.setTimeout(99000);

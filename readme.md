@@ -9,6 +9,14 @@ You can read about [Azure Storage](https://docs.microsoft.com/azure/storage/).
 * Blobs
 * Queues
 
+### Opinions
+
+If the outermost storage inside the resource, such as a share or container, doesn't exist, it is created as part of the request. 
+
+### Notes
+
+For Blob storage, the base directory is known as an empty string. 
+
 ## Prerequisites
 
 * Azure subscription
@@ -28,7 +36,25 @@ npm install azure-storage-as-promised
 
 The tests include usage of objects. 
 
-## Usage with Files Object
+## Usage wit Blob in Javascript
+
+```javascript
+require('dotenv').config();
+const BlobStorage = require("azure-storage-as-promised").Blob;
+const myblob = new BlobStorage(process.env.AZURESTORAGECONNECTIONSTRING);
+
+const container="function-blob-upload";
+const directory=""; // root dir is empty string
+const blob="short.txt";
+
+myblob.getBlobProperties(container, directory, blob).then(results=>{
+    console.log(JSON.stringify(results));
+}).catch(err=>{
+    console.log(err);
+})
+```
+
+## Usage with File in typescript
 
 ```javascript
 
