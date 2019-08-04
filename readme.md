@@ -24,7 +24,11 @@ You can read about [Azure Storage](https://docs.microsoft.com/azure/storage/).
 npm install azure-storage-as-promised
 ```
 
-## Usage
+## Usage in tests
+
+The tests include usage of objects. 
+
+## Usage with Files Object
 
 ```javascript
 

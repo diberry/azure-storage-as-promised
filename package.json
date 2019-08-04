@@ -14,13 +14,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/diberry/azure-storeage-as-promised.git"
+    "url": "git+https://github.com/diberry/azure-storage-as-promised.git"
   },
   "scripts": {
     "test": "jest",
     "clean": "rimraf build/*",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
+    "prepublishOnly": "npm test",
     "preversion": "npm run lint",
     "postversion": "git push && git push --tags",
     "version": "npm run format && git add -A src",
