@@ -3,7 +3,7 @@ require('dotenv').config();
 
 import { File } from "../src/index";
 
-describe('AzureFiles', () => {
+describe('File', () => {
 
     it('should manage file', async (done) => {
 
@@ -93,7 +93,7 @@ describe('AzureFiles', () => {
             done(err);
         }
 
-    });           
+    });         
 });  
 
 

@@ -8,6 +8,7 @@ export class File {
     this.fileService = new azure.FileService(connectionString);
   }
   public async createShare(share, options?: any) {
+
     const self = this;
 
     if (!share) {
@@ -75,7 +76,7 @@ export class File {
       });
     });
   }
-  public async getFileUrl(share, directory, filename) {
+  public async getFileUrl(share, directory, filename): Promise<string> {
     const self = this;
 
     if (!share || !directory || !filename) {
@@ -226,21 +227,7 @@ export class File {
   
         deleteFileResults.push(fileDeleted);
     }
-    /*
-    for (let i = 0; i < resultsGetFiles.files.length; i++) {
-      const file: any = resultsGetFiles.files[i];
 
-      const deleteFileResult = await this.deleteFile(share, directory, file.name, options);
-
-      const fileDeleted = {
-        name: file.name,
-        status: deleteFileResult,
-        properties: file,
-      };
-
-      deleteFileResults.push(fileDeleted);
-    }
-    */
     return deleteFileResults;
   }
   // deleted later during garbage collection
@@ -305,6 +292,7 @@ export class File {
   }
 
   public async doesDirectoryExist(share, directory, options?: any) {
+      
     if (!share || !directory) {
         throw Error('File::doesDirectoryExist - params missing');
     }
@@ -322,4 +310,14 @@ export class File {
       });
     });
   }
+  public getAccessToken(share, directory, file, sharedAccessPolicy={ AccessPolicy: { 
+        Expiry: (new Date().getMinutes() + 5),
+        Permissions: azure.FileUtilities.SharedAccessPermissions.READ,
+        Start: new Date()}}){
+
+        if ( !share || !directory || !file || !sharedAccessPolicy) throw Error("Files - params missing");
+
+        return this.fileService.generateSharedAccessSignature(share, directory, file, sharedAccessPolicy);
+
+    }
 }
