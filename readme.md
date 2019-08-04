@@ -6,6 +6,8 @@ You can read about [Azure Storage](https://docs.microsoft.com/azure/storage/).
 ## Includes
 
 * Files 
+* Blobs
+* Queues
 
 ## Prerequisites
 
