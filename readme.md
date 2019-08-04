@@ -36,7 +36,7 @@ npm install azure-storage-as-promised
 
 The tests include usage of objects. 
 
-## Usage wit Blob in Javascript
+## Usage with Blob in Javascript
 
 ```javascript
 require('dotenv').config();
