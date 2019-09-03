@@ -1,6 +1,8 @@
 A promise wrapper for Azure Storage. [Github repo](https://github.com/diberry/azure-storage-as-promised)
 
 
+
+
 You can read about [Azure Storage](https://docs.microsoft.com/azure/storage/).
 
 ## Includes
