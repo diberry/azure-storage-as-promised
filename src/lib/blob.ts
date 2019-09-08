@@ -178,4 +178,16 @@ export class Blob {
       throw err;
     }
   }
+  /**
+   * Returns writable blob. 
+   * 
+   * @param container
+   * @param directory, base directory is noted as empty string.
+   * @param blob
+   * @param options = { blockIdPrefix: 'block' }
+   */
+  public getWriteStreamToBlob(container, blob, options?:any){
+
+    return this.blobService.createWriteStreamToBlockBlob(container, blob, options)
+  }
 }
