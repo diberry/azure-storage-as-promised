@@ -1,6 +1,6 @@
 {
   "name": "azure-storage-as-promised",
-  "version": "0.8.4",
+  "version": "0.9.0",
   "description": "Wrapper on top of azure-storage with promises.",
   "author": "diberry",
   "license": "Apache-2.0",

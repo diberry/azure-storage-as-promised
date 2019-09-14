@@ -40,6 +40,8 @@ The tests include usage of objects.
 
 ## Usage with Blob in Javascript
 
+This method signature changed in V 0.9.0. 
+
 ```javascript
 require('dotenv').config();
 const BlobStorage = require("azure-storage-as-promised").Blob;
@@ -49,7 +51,9 @@ const container="function-blob-upload";
 const directory=""; // root dir is empty string
 const blob="short.txt";
 
-myblob.getBlobProperties(container, directory, blob).then(results=>{
+const finalBlob = directory + '/' + blob;
+
+myblob.getBlobProperties(container, blob).then(results=>{
     console.log(JSON.stringify(results));
 }).catch(err=>{
     console.log(err);
@@ -105,3 +109,9 @@ const deleteShareResult:any = await fileAzure.deleteShare(share);
 ```
 npm run test
 ```
+
+## Change log
+
+* Version 0.9.0
+
+    Blob.getBlobProperties has new signature - directory is now a part of blob. For example, if directory is 'abc' and blob name is 'xyz', these are passing in as the blob variable, 'xyz/abc'. 

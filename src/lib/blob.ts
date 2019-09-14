@@ -123,21 +123,19 @@ export class Blob {
   /**
    *
    * @param container
-   * @param directory, base directory is noted as empty string.
    * @param blob
    * @param options
    */
-  public async getBlobProperties(container, directory, blob, options?: any) {
+  public async getBlobProperties(container, blob, options?: any) {
     try {
       if (!container || !blob) {
         throw Error('Blob - params missing');
       }
 
       const self = this;
-      const properBlob = utils.properBlob(directory, blob);
 
       return new Promise((resolve, reject) => {
-        self.blobService.getBlobProperties(container, properBlob, options, (error, result) => {
+        self.blobService.getBlobProperties(container, blob, options, (error, result) => {
           if (error) {
             return reject(error);
           }
@@ -148,7 +146,7 @@ export class Blob {
     } catch (err) {
       throw err;
     }
-  }
+  }  
   /**
    * Converts blob to text. The blockBlob and response return vals from getBlobToText are not returned.
    * @param container

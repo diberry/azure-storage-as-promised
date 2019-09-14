@@ -60,7 +60,8 @@ describe('File', () => {
             expect(blobResults).toHaveProperty('lastModified');
 
             // get properties of new blob
-            const properties = await blobAzure.getBlobProperties(share, directory, fileName);
+            const finalBlob = directory ? directory + "/" + fileName : fileName;
+            const properties = await blobAzure.getBlobProperties(share, finalBlob);
             expect(properties).toHaveProperty('lastModified');
 
             done();

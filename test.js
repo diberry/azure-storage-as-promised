@@ -6,7 +6,9 @@ const container="mycontainer";
 const directory=""; // root dir is empty string
 const blob="short.txt";
 
-myblob.getBlobProperties(container, directory, blob).then(results=>{
+const finalBlob = directory + "/" + blob;
+
+myblob.getBlobProperties(container, finalBlob).then(results=>{
     console.log(JSON.stringify(results));
 }).catch(err=>{
     console.log(err);

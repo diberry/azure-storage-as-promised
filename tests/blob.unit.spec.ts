@@ -53,7 +53,8 @@ describe('Blob', () => {
             expect(results.lastModified).not.toBe(undefined);
 
             // get blob properties
-            const properties:any = await blob.getBlobProperties(container, directory, fileName);
+            const finalBlob = directory ? directory + "/" + fileName : fileName;
+            const properties:any = await blob.getBlobProperties(container, finalBlob);
             expect(properties.lastModified).not.toBe(undefined);
             
             // get text from blob
@@ -88,7 +89,8 @@ describe('Blob', () => {
             expect(results.lastModified).not.toBe(undefined);
 
             // get blob properties
-            const properties:any = await blob.getBlobProperties(container, directory, fileName);
+            const finalBlob = directory ? directory + "/" + fileName : fileName;
+            const properties:any = await blob.getBlobProperties(container, finalBlob);
             expect(properties.lastModified).not.toBe(undefined);
             
             // get text from blob
